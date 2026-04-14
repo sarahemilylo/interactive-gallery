@@ -1,0 +1,7 @@
+services:
+  interactive-gallery:
+    build: .
+    container_name: interactive-gallery
+    restart: unless-stopped
+    ports:
+      - "3333:80"
