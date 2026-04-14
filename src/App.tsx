@@ -19,7 +19,7 @@ const ARTWORKS: Artwork[] = [
     medium: "Documentary",
     description:
       "The soul of the Innu language is the land, water and forests of the fast-disappearing caribou. Through his music, Florent Vollant continues to make this language heard around the world.",
-    image: "/florent-vollant-XL.jpg",
+    image: `${import.meta.env.BASE_URL}florent-vollant-XL.jpg`,
   },
   {
     id: 2,
@@ -28,7 +28,7 @@ const ARTWORKS: Artwork[] = [
     medium: "Poem Accompaniment",
     description:
       "The poem Earth Story was written by Nicolas Bonin, a 17-year-old Métis student from Winnipeg, Manitoba, in 2014 (Bonin). His poem explores topics connected to the Indigenous, the land, and their culture. It explores the stark contrast between the Indigenous way of life and that of European civilization, as well as the way they pass down their stories.",
-    image: "/earth-story-poem.png",
+    image: `${import.meta.env.BASE_URL}earth-story-poem.png`,
   },
   {
     id: 3,
@@ -36,7 +36,7 @@ const ARTWORKS: Artwork[] = [
     year: "2012",
     medium: "Artwork Accompaniment",
     description: "Artist: Christi Belcourt",
-    image: "/christi-belcourt-mirror-2.jpg",
+    image: `${import.meta.env.BASE_URL}christi-belcourt-mirror-2.jpg`,
   },
   {
     id: 4,
@@ -45,7 +45,7 @@ const ARTWORKS: Artwork[] = [
     medium: "Podcast Accompaniment",
     description:
       "The podcast All My Relations is co-hosted by Matika Wilbur (Swinomish and Tulalip) and Temryss Lane (Lummi Nation). In the episode, “Indigenous Artist to Artist (Part 1): Adapting To Pandemic & Daring to Dream,” they speak with three Indigenous artists, exploring the realms of creativity and culture. The episode highlights how these Indigenous artists continue to share their stories and preserve their traditions in a world where cultural appropriation is common.",
-    image: "/podcast-image.png",
+    image: `${import.meta.env.BASE_URL}podcast-image.png`,
   },
   {
     id: 5,
@@ -53,7 +53,7 @@ const ARTWORKS: Artwork[] = [
     year: "",
     medium: "",
     description: "This resource accompaniment was created by Sarah Lo (April 2026).",
-    image: "/works-cited.png",
+    image: `${import.meta.env.BASE_URL}works-cited.png`,
   },
 ];
 
@@ -62,7 +62,7 @@ function clsx(...parts: Array<string | false | null | undefined>) {
 }
 
 function getArtworkImage(art: Artwork): string {
-  return art.image ?? `/images/${art.id}.jpg`;
+  return art.image ?? `${import.meta.env.BASE_URL}images/${art.id}.jpg`;
 }
 
 function ScribbleBackdrop() {
@@ -605,7 +605,7 @@ function FirstArtworkContributors() {
       <div className="grid gap-10 md:grid-cols-2">
         <article className="space-y-5 border-t border-black/8 pt-4 md:border-t-0 md:pt-0">
           <div className="aspect-[4/3] w-full overflow-hidden bg-neutral-200">
-            <img src="/pierre.png" alt="Pierre-Mathieu Fortin" className="h-full w-full object-cover" />
+            <img src={`${import.meta.env.BASE_URL}pierre.png`} alt="Pierre-Mathieu Fortin" className="h-full w-full object-cover" />
           </div>
           <div>
             <div className="text-3xl font-light text-[#4c6f95]">Producer</div>
@@ -618,7 +618,7 @@ function FirstArtworkContributors() {
 
         <article className="space-y-5 border-t border-black/8 pt-4 md:border-t-0 md:pt-0">
           <div className="aspect-[4/3] w-full overflow-hidden bg-neutral-200">
-            <img src="/nicholas.png" alt="Nicolas Renaud" className="h-full w-full object-cover" />
+            <img src={`${import.meta.env.BASE_URL}nicholas.png`} alt="Nicolas Renaud" className="h-full w-full object-cover" />
           </div>
           <div>
             <div className="text-3xl font-light text-[#4c6f95]">Director</div>
