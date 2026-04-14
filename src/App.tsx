@@ -169,7 +169,7 @@ function Landing({ onEnter }: { onEnter: () => void }) {
       >
         <LittleFigure className="scale-125 md:scale-150" />
         <div className="text-center text-black/65">
-          <div className="text-xs uppercase tracking-[0.45em]">Interactive Gallery</div>
+          <div className="text-xs uppercase tracking-[0.45em]">Music Room Interactive Gallery</div>
           <div className="mt-3 text-3xl font-light tracking-tight md:text-5xl">Enter the Exhibition</div>
         </div>
         <button
