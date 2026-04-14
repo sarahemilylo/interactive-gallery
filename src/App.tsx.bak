@@ -8,6 +8,7 @@ type Artwork = {
   year: string;
   medium: string;
   description: string;
+  mood: string;
   image?: string;
 };
 
@@ -18,7 +19,9 @@ const ARTWORKS: Artwork[] = [
     year: "2021",
     medium: "Documentary",
     description:
-      "The soul of the Innu language is the land, water and forests of the fast-disappearing caribou. Through his music, Florent Vollant continues to make this language heard around the world.",    image: "/florent-vollant-XL.jpg",
+      "The soul of the Innu language is the land, water and forests of the fast-disappearing caribou. Through his music, Florent Vollant continues to make this language heard around the world.",
+    mood: "identity",
+    image: "/florent-vollant-XL.jpg",
   },
   {
     id: 2,
@@ -26,28 +29,36 @@ const ARTWORKS: Artwork[] = [
     year: "2014",
     medium: "Poem",
     description:
-      "The poem Earth Story was written by Nicolas Bonin, a 17-year-old Métis student from Winnipeg, Manitoba, in 2014 (Bonin). His poem explores topics connected to the Indigenous, the land, and their culture. It explores the stark contrast between the Indigenous way of life and that of European civilization, as well as the way they pass down their stories.",    image: "/earth-story-poem.png",
+      "The poem Earth Story was written by Nicolas Bonin, a 17-year-old Métis student from Winnipeg, Manitoba, in 2014 (Bonin). His poem explores topics connected to the Indigenous, the land, and their culture. It explores the stark contrast between the Indigenous way of life and that of European civilization, as well as the way they pass down their stories.",
+    mood: "reflection",
+    image: "/earth-story-poem.png",
   },
   {
     id: 3,
     title: "This Painting is a Mirror",
     year: "2012",
     medium: "Artwork Accompaniment",
-    description: "Artist: Christi Belcourt",    image: "/christi-belcourt-mirror-2.jpg",
+    description: "Artist: Christi Belcourt",
+    mood: "still",
+    image: "/christi-belcourt-mirror-2.jpg",
   },
   {
     id: 4,
     title: "All My Relations Podcast",
     year: "2020",
     medium: "Podcast",
-    description: "The podcast All My Relations is co-hosted by Matika Wilbur (Swinomish and Tulalip) and Temryss Lane (Lummi Nation). In the episode, “Indigenous Artist to Artist (Part 1): Adapting To Pandemic & Daring to Dream,” they speak with three Indigenous artists, exploring the realms of creativity and culture. The episode highlights how these Indigenous artists continue to share their stories and preserve their traditions in a world where cultural appropriation is common.",    image: "/podcast-image.png",
+    description: "The podcast All My Relations is co-hosted by Matika Wilbur (Swinomish and Tulalip) and Temryss Lane (Lummi Nation). In the episode, “Indigenous Artist to Artist (Part 1): Adapting To Pandemic & Daring to Dream,” they speak with three Indigenous artists, exploring the realms of creativity and culture. The episode highlights how these Indigenous artists continue to share their stories and preserve their traditions in a world where cultural appropriation is common.",
+    mood: "conversation",
+    image: "/podcast-image.png",
   },
   {
     id: 5,
     title: "Resources",
     year: "",
     medium: "",
-    description: "This resource accompaniment was created by Sarah Lo (April 2026).",    image: "/works-cited.png"
+    description: "This resource accompaniment was created by Sarah Lo (April 2026).",
+    mood: "memory",
+    image: "/works-cited.png"
   },
 ];
 
@@ -169,8 +180,8 @@ function Landing({ onEnter }: { onEnter: () => void }) {
       >
         <LittleFigure className="scale-125 md:scale-150" />
         <div className="text-center text-black/65">
-          <div className="text-xs uppercase tracking-[0.45em]">Interactive Gallery</div>
-          <div className="mt-3 text-3xl font-light tracking-tight md:text-5xl">Enter the Exhibition</div>
+          <div className="text-xs uppercase tracking-[0.45em]">Interactive gallery</div>
+          <div className="mt-3 text-3xl font-light tracking-tight md:text-5xl">Enter the exhibition</div>
         </div>
         <button
           type="button"
@@ -284,15 +295,6 @@ function GalleryRoom({
     };
 
     const onKeyDown = (e: KeyboardEvent) => {
-      const target = e.target as HTMLElement | null;
-      const isTypingTarget =
-        !!target &&
-        (target.tagName === "INPUT" ||
-          target.tagName === "TEXTAREA" ||
-          target.isContentEditable);
-
-      if (isTypingTarget) return;
-
       const key = e.key.toLowerCase();
       if (["arrowleft", "arrowright", "arrowup", "a", "d", "w", "enter", " ", "escape"].includes(key)) {
         e.preventDefault();
@@ -301,15 +303,6 @@ function GalleryRoom({
     };
 
     const onKeyUp = (e: KeyboardEvent) => {
-      const target = e.target as HTMLElement | null;
-      const isTypingTarget =
-        !!target &&
-        (target.tagName === "INPUT" ||
-          target.tagName === "TEXTAREA" ||
-          target.isContentEditable);
-
-      if (isTypingTarget) return;
-
       pressedKeysRef.current.delete(e.key.toLowerCase());
     };
 
@@ -375,7 +368,7 @@ function GalleryRoom({
             const scale = active ? 1.14 : 0.94 + prominence * 0.12;
             const opacity = Math.max(0.35, 1 - distance / 42);
             const top = 16;
-            const width = active ? "12%" : prominence > 0.55 ? "10.5%" : "9%";
+            const width = active ? "24%" : prominence > 0.55 ? "21%" : "18%";
 
             return (
               <motion.div
@@ -460,7 +453,6 @@ function GalleryMenu({
   selected,
   query,
   setQuery,
-  onGoHome,
 }: {
   open: boolean;
   onClose: () => void;
@@ -468,7 +460,6 @@ function GalleryMenu({
   selected: number;
   query: string;
   setQuery: (v: string) => void;
-  onGoHome: () => void;
 }) {
   const filtered = ARTWORKS.filter((art) => art.title.toLowerCase().includes(query.toLowerCase()));
 
@@ -497,17 +488,9 @@ function GalleryMenu({
 
             <div className="border-r border-white/15 px-8 py-10">
               <div className="space-y-2 pt-10 text-2xl md:text-4xl">
-  <button
-    onClick={() => {
-      onGoHome();
-      onClose();
-    }}
-    className="text-white/35 hover:text-white transition text-left"
-  >
-    Home
-  </button>
-  <div className="font-medium">Gallery</div>
-</div>
+                <div className="text-white/35">Home</div>
+                <div className="font-medium">Gallery</div>
+              </div>
             </div>
 
             <div className="flex min-h-0 flex-col border-r border-white/15 px-6 py-10 md:px-7">
@@ -552,6 +535,7 @@ function GalleryMenu({
                     <div className="text-lg text-white">{ARTWORKS[selected].title}</div>
                     <div className="mt-1">{ARTWORKS[selected].medium} • {ARTWORKS[selected].year}</div>
                   </div>
+                  <div className="text-right text-white/55">Mood: {ARTWORKS[selected].mood}</div>
                 </div>
               </div>
             </div>
@@ -896,7 +880,6 @@ export default function InteractiveGalleryExperience() {
               selected={index}
               query={query}
               setQuery={setQuery}
-              onGoHome={() => setScreen("landing")}
             />
             <DetailModal
               art={ARTWORKS[index]}
