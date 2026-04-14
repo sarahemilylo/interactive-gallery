@@ -18,7 +18,8 @@ const ARTWORKS: Artwork[] = [
     year: "2021",
     medium: "Documentary",
     description:
-      "The soul of the Innu language is the land, water and forests of the fast-disappearing caribou. Through his music, Florent Vollant continues to make this language heard around the world.",    image: `${import.meta.env.BASE_URL}florent-vollant-XL.jpg`,
+      "The soul of the Innu language is the land, water and forests of the fast-disappearing caribou. Through his music, Florent Vollant continues to make this language heard around the world.",
+    image: "/florent-vollant-XL.jpg",
   },
   {
     id: 2,
@@ -26,28 +27,33 @@ const ARTWORKS: Artwork[] = [
     year: "2014",
     medium: "Poem Accompaniment",
     description:
-      "The poem Earth Story was written by Nicolas Bonin, a 17-year-old Métis student from Winnipeg, Manitoba, in 2014 (Bonin). His poem explores topics connected to the Indigenous, the land, and their culture. It explores the stark contrast between the Indigenous way of life and that of European civilization, as well as the way they pass down their stories.",    image: `${import.meta.env.BASE_URL}earth-story-poem.png`,
+      "The poem Earth Story was written by Nicolas Bonin, a 17-year-old Métis student from Winnipeg, Manitoba, in 2014 (Bonin). His poem explores topics connected to the Indigenous, the land, and their culture. It explores the stark contrast between the Indigenous way of life and that of European civilization, as well as the way they pass down their stories.",
+    image: "/earth-story-poem.png",
   },
   {
     id: 3,
     title: "This Painting is a Mirror",
     year: "2012",
     medium: "Artwork Accompaniment",
-    description: "Artist: Christi Belcourt",    image: `${import.meta.env.BASE_URL}christi-belcourt-mirror-2.jpg`,
+    description: "Artist: Christi Belcourt",
+    image: "/christi-belcourt-mirror-2.jpg",
   },
   {
     id: 4,
     title: "All My Relations Podcast",
     year: "2020",
     medium: "Podcast Accompaniment",
-    description: "The podcast All My Relations is co-hosted by Matika Wilbur (Swinomish and Tulalip) and Temryss Lane (Lummi Nation). In the episode, “Indigenous Artist to Artist (Part 1): Adapting To Pandemic & Daring to Dream,” they speak with three Indigenous artists, exploring the realms of creativity and culture. The episode highlights how these Indigenous artists continue to share their stories and preserve their traditions in a world where cultural appropriation is common.",    image: `${import.meta.env.BASE_URL}podcast-image.png`,
+    description:
+      "The podcast All My Relations is co-hosted by Matika Wilbur (Swinomish and Tulalip) and Temryss Lane (Lummi Nation). In the episode, “Indigenous Artist to Artist (Part 1): Adapting To Pandemic & Daring to Dream,” they speak with three Indigenous artists, exploring the realms of creativity and culture. The episode highlights how these Indigenous artists continue to share their stories and preserve their traditions in a world where cultural appropriation is common.",
+    image: "/podcast-image.png",
   },
   {
     id: 5,
     title: "Resources",
     year: "",
     medium: "",
-    description: "This resource accompaniment was created by Sarah Lo (April 2026).",    image: `${import.meta.env.BASE_URL}works-cited.png`
+    description: "This resource accompaniment was created by Sarah Lo (April 2026).",
+    image: "/works-cited.png",
   },
 ];
 
@@ -56,7 +62,7 @@ function clsx(...parts: Array<string | false | null | undefined>) {
 }
 
 function getArtworkImage(art: Artwork): string {
-  return art.image ?? `${import.meta.env.BASE_URL}images/${art.id}.jpg`;
+  return art.image ?? `/images/${art.id}.jpg`;
 }
 
 function ScribbleBackdrop() {
@@ -287,9 +293,7 @@ function GalleryRoom({
       const target = e.target as HTMLElement | null;
       const isTypingTarget =
         !!target &&
-        (target.tagName === "INPUT" ||
-          target.tagName === "TEXTAREA" ||
-          target.isContentEditable);
+        (target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.isContentEditable);
 
       if (isTypingTarget) return;
 
@@ -304,9 +308,7 @@ function GalleryRoom({
       const target = e.target as HTMLElement | null;
       const isTypingTarget =
         !!target &&
-        (target.tagName === "INPUT" ||
-          target.tagName === "TEXTAREA" ||
-          target.isContentEditable);
+        (target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.isContentEditable);
 
       if (isTypingTarget) return;
 
@@ -386,7 +388,17 @@ function GalleryRoom({
                 style={{ width, transform: `scale(${scale})`, transformOrigin: "center bottom" }}
               >
                 <div className="absolute left-1/2 top-0 h-full w-[75%] -translate-x-1/2 translate-x-[6px] translate-y-[6px] bg-black/6 blur-sm" />
-                <FramedArtwork art={art} active={active} onClick={() => setIndex(i)} />
+                <FramedArtwork
+                  art={art}
+                  active={active}
+                  onClick={() => {
+                    setIndex(i);
+                    setPlayerX(worldSpots[i]);
+                    playerXRef.current = worldSpots[i];
+                    indexRef.current = i;
+                    onOpenDetail();
+                  }}
+                />
               </motion.div>
             );
           })}
@@ -402,7 +414,11 @@ function GalleryRoom({
                 onClick={() => setPlayerX(spot)}
                 className={clsx(
                   "absolute bottom-[10%] z-20 h-6 w-20 -translate-x-1/2 rounded-full border-2 transition-all duration-200",
-                  active ? "border-black/80 bg-white/55" : near ? "border-black/55 bg-white/25" : "border-black/32 bg-transparent",
+                  active
+                    ? "border-black/80 bg-white/55"
+                    : near
+                      ? "border-black/55 bg-white/25"
+                      : "border-black/32 bg-transparent",
                   highlighted && "scale-[1.15] border-black bg-white/70 shadow-lg"
                 )}
                 style={{ left: `${spot}%` }}
@@ -497,17 +513,17 @@ function GalleryMenu({
 
             <div className="border-r border-white/15 px-8 py-10">
               <div className="space-y-2 pt-10 text-2xl md:text-4xl">
-  <button
-    onClick={() => {
-      onGoHome();
-      onClose();
-    }}
-    className="text-white/35 hover:text-white transition text-left"
-  >
-    Home
-  </button>
-  <div className="font-medium">Gallery</div>
-</div>
+                <button
+                  onClick={() => {
+                    onGoHome();
+                    onClose();
+                  }}
+                  className="text-left text-white/35 transition hover:text-white"
+                >
+                  Home
+                </button>
+                <div className="font-medium">Gallery</div>
+              </div>
             </div>
 
             <div className="flex min-h-0 flex-col border-r border-white/15 px-6 py-10 md:px-7">
@@ -589,7 +605,7 @@ function FirstArtworkContributors() {
       <div className="grid gap-10 md:grid-cols-2">
         <article className="space-y-5 border-t border-black/8 pt-4 md:border-t-0 md:pt-0">
           <div className="aspect-[4/3] w-full overflow-hidden bg-neutral-200">
-            <img src={`${import.meta.env.BASE_URL}pierre.png`} alt="Pierre-Mathieu Fortin" className="h-full w-full object-cover" />
+            <img src="/pierre.png" alt="Pierre-Mathieu Fortin" className="h-full w-full object-cover" />
           </div>
           <div>
             <div className="text-3xl font-light text-[#4c6f95]">Producer</div>
@@ -602,7 +618,7 @@ function FirstArtworkContributors() {
 
         <article className="space-y-5 border-t border-black/8 pt-4 md:border-t-0 md:pt-0">
           <div className="aspect-[4/3] w-full overflow-hidden bg-neutral-200">
-            <img src={`${import.meta.env.BASE_URL}nicholas.png`} alt="Nicolas Renaud" className="h-full w-full object-cover" />
+            <img src="/nicholas.png" alt="Nicolas Renaud" className="h-full w-full object-cover" />
           </div>
           <div>
             <div className="text-3xl font-light text-[#4c6f95]">Director</div>
@@ -629,30 +645,25 @@ function FirstArtworkMoreDetails() {
         <p className="text-base leading-8 text-black/72">
           <em>Florent Vollant: I Dream in Innu</em> is a performative documentary created by Pierre-Mathieu Fortin and Nicolas Renaud. Showcasing the deep connection between the Innu people and their culture, this short documentary shares Florent Vollant’s story while highlighting the importance of protecting Indigenous language, culture, and land.
         </p>
-
         <p className="text-base leading-8 text-black/72">
           Florent Vollant is an Innu musician and songwriter who uses his music to share his experiences and preserve his culture. Through his storytelling and songs, he expresses the importance of language, identity, and connection to the land.
         </p>
-
         <p className="text-base leading-8 text-black/72">
           The film emphasizes how nature was once abundant and central to the Innu way of life, but is now increasingly threatened. For instance, the caribou, a prominent figure in Innu culture, has been declining in population, threatening both the environment and the traditions associated with it.
         </p>
-
         <p className="text-base leading-8 text-black/72">
           Correspondingly, the film illustrates the loss of freedom experienced by the Innu people after being confined to reserves, much like the caribou were confined behind fences. However, through his music and storytelling, Florent expresses his identity while working to preserve the Innu language and culture.
         </p>
-
         <p className="text-base leading-8 text-black/72">
           In addition, this documentary highlights the importance of dreams and traditional knowledge, which play a key role in guiding Indigenous life. Because the Innu language, culture, and environment are deeply interconnected, protecting the land and the caribou is essential for preserving this culture.
         </p>
-
         <p className="text-base leading-8 text-black/72">
           Furthermore, this short documentary highlights the importance of language preservation, dreams, and cultural identity.
         </p>
       </section>
       <SectionDivider title="Conventions & Techniques" />
       <section>
-        <p className="text-base leading-8 text-black/72 mb-6">
+        <p className="mb-6 text-base leading-8 text-black/72">
           Throughout this five-minute film, Renaud and his team use various techniques to effectively communicate the documentary’s central message and reveal deeper themes of identity and culture, both of which shape how the documentary is perceived. Using both audio and visual components, Nicholas directs the film into a visual and auditory experience, with each second having been perfectly constructed to guide the audience through Vollant’s reflections while reinforcing the importance of preserving language, culture, and tradition. Together, these elements work seamlessly to create a cohesive and emotionally impactful documentary.
         </p>
         <div className="grid gap-8 md:grid-cols-2 md:gap-10">
@@ -715,7 +726,6 @@ function FourthArtworkDetails() {
           As they discuss with artists Pat Pruitt, Waddie Crazyhorse, and J. Nicole Hatfield, they explore how art can be used as a form of cultural preservation and resistance. For example, Pruitt uses his metalworking skills to create jewelry pieces, such as feathers. In turn, he can use this to express his cultural identity and share stories rooted in his heritage. Similar to Florent, Pruitt uses his art as a way to preserve and pass down traditions and cultural knowledge to future generations. While they use different forms of art, they are able to communicate their experiences, maintain their cultural identity, and ensure that their traditions continue despite modern challenges. Additionally, as they discuss with Waddie Crazyhorse and Nicole Hatfield, they explore how art can be used as a form of cultural preservation and resistance. For example, Waddie emphasizes that his jewelry carries his energy and personal connection to his culture, showing that art is not just physical, but also deeply spiritual and meaningful. In the episode, he explains that each piece reflects his effort, identity, and relationships, reinforcing the idea that art can build connections within and beyond Indigenous communities. Hatfield, an Indigenous painter, instead uses her form of art as a way of healing and self-expression, highlighting the importance of reclaiming identity and empowering future generations. Like Vollant, all three artists use their respective art forms to preserve their cultures, express their identities, and pass down traditions to future generations. While they all use various forms of art, they are able to use their creations to tell stories and their culture amidst the loss of Indigenous culture in the modern world.
         </p>
       </section>
-
       <SectionDivider title="Elements & Techniques" />
       <section>
         <p className="text-base leading-8 text-black/72">
@@ -731,12 +741,29 @@ function DetailModal({
   open,
   onClose,
   onOpenMore,
+  onOpenMenu,
 }: {
   art: Artwork;
   open: boolean;
   onClose: () => void;
   onOpenMore: () => void;
+  onOpenMenu: () => void;
 }) {
+  useEffect(() => {
+    if (!open) return;
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        onClose();
+        onOpenMenu();
+      }
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [open, onClose, onOpenMenu]);
+
   return (
     <AnimatePresence>
       {open && (
@@ -778,14 +805,12 @@ function DetailModal({
                     {art.medium} • {art.year}
                   </div>
                 )}
-
                 {art.id === 1 ? (
                   <FirstArtworkBody />
                 ) : (
                   <p className="mt-8 max-w-md text-base leading-8 text-black/68">{art.description}</p>
                 )}
               </div>
-
               <div className="mt-8 grid gap-5 border-t border-black/10 pt-8 text-sm text-black/62">
                 <div>
                   <div className="text-xs uppercase tracking-[0.3em] text-black/40">Curatorial note</div>
@@ -836,14 +861,11 @@ function MoreDetailsPage({ art, open, onClose }: { art: Artwork; open: boolean; 
             >
               ← Back
             </button>
-
             <h1 className="text-4xl font-light md:text-5xl">{art.title}</h1>
             {art.id !== 5 && <div className="mt-4 text-sm text-black/50">{art.medium} • {art.year}</div>}
-
             <div className="mt-10">
               <img src={getArtworkImage(art)} alt={art.title} className="w-full max-w-xl" />
             </div>
-
             <div className="mt-10 space-y-6 text-lg leading-8 text-black/75">
               {art.id === 1 ? (
                 <FirstArtworkMoreDetails />
@@ -926,6 +948,7 @@ export default function InteractiveGalleryExperience() {
                 setDetailOpen(false);
                 setMoreOpen(true);
               }}
+              onOpenMenu={() => setMenuOpen(true)}
             />
             <MoreDetailsPage art={ARTWORKS[index]} open={moreOpen} onClose={() => setMoreOpen(false)} />
           </motion.div>
