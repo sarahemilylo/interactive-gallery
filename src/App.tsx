@@ -24,7 +24,7 @@ const ARTWORKS: Artwork[] = [
     id: 2,
     title: "Earth Story",
     year: "2014",
-    medium: "Poem",
+    medium: "Poem Accompaniment",
     description:
       "The poem Earth Story was written by Nicolas Bonin, a 17-year-old Métis student from Winnipeg, Manitoba, in 2014 (Bonin). His poem explores topics connected to the Indigenous, the land, and their culture. It explores the stark contrast between the Indigenous way of life and that of European civilization, as well as the way they pass down their stories.",    image: "/earth-story-poem.png",
   },
@@ -39,7 +39,7 @@ const ARTWORKS: Artwork[] = [
     id: 4,
     title: "All My Relations Podcast",
     year: "2020",
-    medium: "Podcast",
+    medium: "Podcast Accompaniment",
     description: "The podcast All My Relations is co-hosted by Matika Wilbur (Swinomish and Tulalip) and Temryss Lane (Lummi Nation). In the episode, “Indigenous Artist to Artist (Part 1): Adapting To Pandemic & Daring to Dream,” they speak with three Indigenous artists, exploring the realms of creativity and culture. The episode highlights how these Indigenous artists continue to share their stories and preserve their traditions in a world where cultural appropriation is common.",    image: "/podcast-image.png",
   },
   {
@@ -169,7 +169,7 @@ function Landing({ onEnter }: { onEnter: () => void }) {
       >
         <LittleFigure className="scale-125 md:scale-150" />
         <div className="text-center text-black/65">
-          <div className="text-xs uppercase tracking-[0.45em]">Music Room Interactive Gallery</div>
+          <div className="text-xs uppercase tracking-[0.45em]">Music Room Gallery</div>
           <div className="mt-3 text-3xl font-light tracking-tight md:text-5xl">Enter the Exhibition</div>
         </div>
         <button
@@ -577,7 +577,7 @@ function SectionDivider({ title }: { title: string }) {
 function FirstArtworkBody() {
   return (
     <p className="mt-8 max-w-md text-base leading-8 text-black/68">
-      <em>Florent Vollant: I Dream in Innu</em> — The soul of the Innu language is the land, water and forests of the fast-disappearing caribou. Through his music, Florent Vollant continues to make this language heard around the world.
+      The soul of the Innu language is the land, water and forests of the fast-disappearing caribou. Through his music, Florent Vollant continues to make this language heard around the world.
     </p>
   );
 }
@@ -621,13 +621,33 @@ function FirstArtworkMoreDetails() {
   return (
     <>
       <p>
-        <em>Florent Vollant: I Dream in Innu</em> — The soul of the Innu language is the land, water and forests of the fast-disappearing caribou. Through his music, Florent Vollant continues to make this language heard around the world.
+        The soul of the Innu language is the land, water and forests of the fast-disappearing caribou. Through his music, Florent Vollant continues to make this language heard around the world.
       </p>
       <FirstArtworkContributors />
       <SectionDivider title="Main Idea(s)/Key Messages" />
-      <section>
+      <section className="space-y-6">
         <p className="text-base leading-8 text-black/72">
-          <em>Florent Vollant: I Dream in Innu</em> is a performative documentary created by Pierre-Mathieu Fortin and Nicolas Renaud. Showcasing the deep connection between the Innu people and their culture, this short documentary shares Florent Vollant’s story while highlighting the importance of protecting Indigenous language, culture, and land. Florent Vollant is an Innu musician and songwriter who uses his music to share his experiences and preserve his culture. Through his storytelling and songs, he expresses the importance of language, identity, and connection to the land. The film also emphasizes how nature was once abundant and central to the Innu way of life, but is now increasingly threatened. For instance, the caribou, a prominent figure in Innu culture, has been declining in population, threatening both the environment and the traditions associated with it. Correspondingly, the film illustrates the loss of freedom experienced by the Innu people after being confined to reserves, much like the caribou were confined behind fences. However, through his music and storytelling, Florent expresses his identity while working to preserve the Innu language and culture. In addition, this documentary highlights the importance of dreams and traditional knowledge, which play a key role in guiding Indigenous life. Because the Innu language, culture, and environment are deeply interconnected, protecting the land and the caribou is essential for preserving this culture. Furthermore, this short documentary highlights the importance of language preservation, dreams, and cultural identity.
+          <em>Florent Vollant: I Dream in Innu</em> is a performative documentary created by Pierre-Mathieu Fortin and Nicolas Renaud. Showcasing the deep connection between the Innu people and their culture, this short documentary shares Florent Vollant’s story while highlighting the importance of protecting Indigenous language, culture, and land.
+        </p>
+
+        <p className="text-base leading-8 text-black/72">
+          Florent Vollant is an Innu musician and songwriter who uses his music to share his experiences and preserve his culture. Through his storytelling and songs, he expresses the importance of language, identity, and connection to the land.
+        </p>
+
+        <p className="text-base leading-8 text-black/72">
+          The film emphasizes how nature was once abundant and central to the Innu way of life, but is now increasingly threatened. For instance, the caribou, a prominent figure in Innu culture, has been declining in population, threatening both the environment and the traditions associated with it.
+        </p>
+
+        <p className="text-base leading-8 text-black/72">
+          Correspondingly, the film illustrates the loss of freedom experienced by the Innu people after being confined to reserves, much like the caribou were confined behind fences. However, through his music and storytelling, Florent expresses his identity while working to preserve the Innu language and culture.
+        </p>
+
+        <p className="text-base leading-8 text-black/72">
+          In addition, this documentary highlights the importance of dreams and traditional knowledge, which play a key role in guiding Indigenous life. Because the Innu language, culture, and environment are deeply interconnected, protecting the land and the caribou is essential for preserving this culture.
+        </p>
+
+        <p className="text-base leading-8 text-black/72">
+          Furthermore, this short documentary highlights the importance of language preservation, dreams, and cultural identity.
         </p>
       </section>
       <SectionDivider title="Conventions & Techniques" />
