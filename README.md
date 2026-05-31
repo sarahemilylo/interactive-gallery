@@ -5,6 +5,7 @@ An immersive virtual art gallery built with **React**, **TypeScript**, **Vite**,
 Visitors can walk through a digital exhibition space, interact with artworks, view detailed analyses, and explore supporting resources related to Indigenous culture, identity, storytelling, and artistic expression.
 
 <img width="2864" height="1509" alt="image" src="https://github.com/user-attachments/assets/c26d19b0-b52f-43c1-a724-689ebfef5c33" />
+
 ---
 
 ## Features
